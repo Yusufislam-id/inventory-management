@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div align="center">
+    <table border="1" width="1000px">
+        <tr>
+            <th colspan="4">List of Item</th>
+        </tr>
+        <tr>
+            <th>Item Code</th>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Description</th>
+        
+    {% if arr_data|length > 0 %}
+        {% for data in arr_data %}
+        <tr>
+            <td>{{ data.id }}</td>
+            <td>{{ data.nama }}</td>
+            <td>{{ data.jumlah }}</td>
+            <td>{{ data.deskripsi }}</td>
+        </tr>
+        {% endfor %}
+    {% else %}
+        <tr>
+            <td colspan="4" style="text-align: center;">Empty</td>
+        </tr>
+    {% endif %}
+
+    </table>
+</div>
+
+{% endblock %}

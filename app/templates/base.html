@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cross Platform Application</title>
+    </head>
+    <body>
+        <h1 align="center">Inventory Management</h1>
+        <div align="center">
+            <table border="1" width="500px">
+                <tr>
+                    <th colspan="5">Menu Website</th>
+                </tr>
+                <tr>
+                    <th><a href="/">Home</a> </th>
+                    <th><a href="/items">Item List</a></th>
+                    <th><a href="/add-item">Tambah Barang</a></th>
+                </tr>
+            </table>
+        </div>
+        
+        <hr width="500px"/>
+        
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </body>
+</html>
