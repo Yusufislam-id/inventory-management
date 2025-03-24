@@ -1,7 +1,8 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect, request
 
 routes = Blueprint("routes", __name__)
 from app import db, app
+import uuid
 
 # Pages
 @app.route('/')
@@ -21,3 +22,31 @@ def lihatBarang():
         arr_data.append(data)
     
     return render_template("read-item.html", arr_data=arr_data)
+
+
+@app.route('/add-item')
+def tambahBarang():
+    # UUID Generator -> Kapital -> Potong 10 Karakter
+    item_id = str(uuid.uuid4()).replace("-","").upper()[0:10]
+    # Tampilkan HTML dengan Return
+    return render_template("add-item.html", id=item_id)
+
+
+@app.route('/send-data', methods=["POST"])
+def kirimData():
+    # get data from form
+    idBarang = str(request.form.get('id'))
+    namaBarang = str(request.form.get('nama'))
+    jumlahBarang = str(request.form.get('jumlah'))
+    deskripsiBarang = str(request.form.get('deskripsi'))
+    # Masukkan ke Struktur Data
+    data = {
+        'id': idBarang,
+        'nama': namaBarang,
+        'jumlah': jumlahBarang,
+        'deskripsi': deskripsiBarang
+    }
+    # Database Query
+    db.collection('Inventori').document('Doc-'+idBarang).set(data)
+    # display item list
+    return redirect("/items")

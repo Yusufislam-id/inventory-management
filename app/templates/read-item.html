@@ -15,7 +15,10 @@
     {% if arr_data|length > 0 %}
         {% for data in arr_data %}
         <tr>
-            <td>{{ data.id }}</td>
+            <td>{{ data.id }} - 
+                <a href='/update-item?idbarang={{ data.id }}'>Ubah</a> - 
+                <a href='/delete-item?idbarang={{ data.id }}'>Hapus</a>
+            </td>
             <td>{{ data.nama }}</td>
             <td>{{ data.jumlah }}</td>
             <td>{{ data.deskripsi }}</td>
