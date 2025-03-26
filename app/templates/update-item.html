@@ -1,50 +1,33 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Cross Platform Application</title>
-    </head>
-    <body>
-        <h1 align="center">Web Manajemen Inventori</h1>
-        <div align="center">
-            <table border="1" width="500px">
-                <tr>
-                    <th colspan="5">Menu Website</th>
-                </tr>
-                <tr>
-                    <th><a href="/">Home</a> </th>
-                    <th><a href="/LihatBarang">Lihat Barang</a></th>
-                    <th><a href="/TambahBarang">Tambah Barang</a></th>
-                </tr>
-            </table>
-        </div>
-        <hr width="500px"/>
-        <div align="center">
-            <form action="/kirimPerubahan" method="post">
-                <table border="1" width="500px">
-                    <tr>
-                        <th colspan="3">Form Ubah Barang</th>
-                    </tr>
-                    <tr>
-                        <th colspan="3">Masukkan ID Barang</th>
-                    </tr>
-                    <tr>
-                        <td>ID Barang</td><td>:</td><td align="right"><input type="text" name="id" value="IDBARANG" readonly/></td>
-                    </tr>
+{% extends "base.html" %}
 
-                    <tr>
-                        <td>Nama Barang</td><td>:</td><td align="right"><input type="text" name="nama" value="NAMABARANG"/></td>
-                    </tr>
-                    <tr>
-                        <td>Jumlah Barang</td><td>:</td><td align="right"><input type="number" name="jumlah" value="JUMLAHBARANG"/></td>
-                    </tr>
-                    <tr>
-                        <td>Deskripsi Barang</td><td>:</td><td align="right"><input type="text" name="deskripsi" value="DESKRIPSIBARANG"/></td>
-                    </tr>
-                    <tr>
-                        <td colspan="3"><input type="submit" value="Kirim"/></td>
-                    </tr>
-                </table>
-            </form>
-        </div>
-    </body>
-</html>
+{% block content %}
+<div align="center">
+    <form action="/updated" method="post">
+        <table border="1" width="500px">
+            <tr>
+                <th colspan="3">Form Ubah Barang</th>
+            </tr>
+            <tr>
+                <th colspan="3">Masukkan ID Barang</th>
+            </tr>
+            <tr>
+                <td>ID Barang</td><td>:</td><td align="right"><input type="text" name="id" value="{{ data.id }}" readonly/></td>
+            </tr>
+
+            <tr>
+                <td>Nama Barang</td><td>:</td><td align="right"><input type="text" name="nama" value="{{ data.nama }}"/></td>
+            </tr>
+            <tr>
+                <td>Jumlah Barang</td><td>:</td><td align="right"><input type="number" name="jumlah" value="{{ data.jumlah }}"/></td>
+            </tr>
+            <tr>
+                <td>Deskripsi Barang</td><td>:</td><td align="right"><input type="text" name="deskripsi" value="{{ data.deskripsi }}"/></td>
+            </tr>
+            <tr>
+                <td colspan="3"><input type="submit" value="Kirim"/></td>
+            </tr>
+        </table>
+    </form>
+</div>
+    
+{% endblock %}

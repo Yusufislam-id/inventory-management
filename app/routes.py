@@ -50,3 +50,34 @@ def kirimData():
     db.collection('Inventori').document('Doc-'+idBarang).set(data)
     # display item list
     return redirect("/items")
+
+
+@app.route('/update-item')
+def ubahBarang():
+    # Ambil ID Barang dari GET Request
+    idBarang = request.args.get('idbarang')
+
+    # Ambil Data di Database
+    data = db.collection("Inventori").document(idBarang).get().to_dict()
+    
+    # Tampilkan HTML dengan Return
+    return render_template("update-item.html", data=data)
+
+@app.route('/updated', methods=["POST"])
+def kirimPerubahan():
+    # Ambil Data dari Form
+    idBarang = str(request.form.get('id'))
+    namaBarang = str(request.form.get('nama'))
+    jumlahBarang = str(request.form.get('jumlah'))
+    deskripsiBarang = str(request.form.get('deskripsi'))
+    # Masukkan ke Struktur Data
+    data = {
+        'id': idBarang,
+        'nama': namaBarang,
+        'jumlah': jumlahBarang,
+        'deskripsi': deskripsiBarang
+    }
+    # Kueri ke Database
+    db.collection('Inventori').document('Doc-'+idBarang).set(data)
+    # Tampilkan Lihat Barang
+    return redirect("/items")
