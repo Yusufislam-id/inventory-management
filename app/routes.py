@@ -81,3 +81,24 @@ def kirimPerubahan():
     db.collection('Inventori').document('Doc-'+idBarang).set(data)
     # Tampilkan Lihat Barang
     return redirect("/items")
+
+@app.route('/delete-item')
+def hapusBarang():
+    # Ambil ID Barang dari GET Request
+    idBarang = request.args.get('idbarang')
+    
+    # Ambil Data di Database
+    data = db.collection("Inventori").document(idBarang).get().to_dict()
+    
+    # Tampilkan HTML dengan Return
+    return render_template("delete-item.html", data=data)
+
+
+@app.route('/deleted', methods=["POST"])
+def hapusData():
+    # Ambil Data dari Form
+    idBarang = str(request.form.get('id'))
+    # Kueri ke Database
+    db.collection('Inventori').document('Doc-'+idBarang).delete()
+    # Tampilkan Lihat Barang
+    return redirect("/items")
